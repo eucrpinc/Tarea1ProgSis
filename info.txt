@@ -1,55 +1,76 @@
-************************* I N F O *************************
- G R U P O # 6
- LIDER: 
-  APELLIDOS Y NOMBRE: CRIOLLO PINCAY EURO  
-  CARRERA: ING.COMPUTACIÓN
-  POR QUÉ LIDER: SE ENCUENTRA EN EL CENTRO DE DEL GRUPO
-  Y PUEDE MEJOR LA COMUNICACIÓN DEL EQUIPO 
-INTEGRANTES: 
-  APELLIDOS Y NOMBRE: GUAMANÍ HERRERA JOEL 
-  CARRERA: ING. COMPUTACIÓN
-  APELLIDOS Y NOMBRE:MAGALLES AREVALO KEVIN
-  CARRERA: ING. COMPUTACIÓN
-******* D I V I S I O N    D E L    T A L L E R ******* 
-AL PRINCIPIO NO DIVIDIMOS EL TRABAJOS 
--EN EL CUAL UNO SE ENCARGABA DE LAS TODAS LA FUNCIONES DEL
-PRGRAMA ES DECIR LA FUNCIONES DE "AGREGAR PRODUCTOS, ACTUALIZAR
-PRODUCTOS Y VENDER PRODUCTOS"
--AL MISMO TIEMPO SE TRABAJO EN LA PRESENTACION DEL PROGRAMA ES
-DECIR LA CREACION DE LOS DOS MENU TANDO EN DE CREAR E INGRESO 
-DE DE USUARIO COMO EL 2 MENU EL OTRO MENU DE Y LLAMADA DE LAS 
-DIFERENTES FUNCIONES
--Y POR ULTIMO SE ECARGO LA CREACION Y VALIDACION DE LOS USUARIOS
-HACIENDO REFERENCIA AL USUARIO DE BODEGUERO Y VENDEDOR
+E X P L I C A C I O N    T A R E A 
 
-************  L I N K   D E L   V I D E O ************
-            https://youtu.be/H0-O8_eXEOA
-            
-****************** T A L L E R # 1  ******************
+MAIN:
+Este programa en C es un sistema de gestión básico que opera a través de un menú interactivo en la consola. Utiliza tres arreglos para almacenar información sobre usuarios, productos y ventas. Inicia cargando datos desde fuentes externas, como archivos, a estos arreglos. Luego, presenta un menú con opciones como crear/actualizar usuarios y productos, registrar ventas y guardar datos. El bucle principal permite al usuario realizar estas acciones hasta que elige salir (opción 0). Cada opción del menú corresponde a una función específica que realiza la operación seleccionada.
 
 
-TALLER #1
+FUNCIONES.H 
 
-Una tienda de productos electrónicos desea tener un sistema para el registro de los productos que compra y vende para poder en un futuro analizar la rentabilidad de cada producto, categorías y marcas.
+El archivo "funciones.h" contiene las declaraciones de estructuras y funciones utilizadas en el programa principal. Aquí hay un resumen de su contenido:
 
-El cliente espera el próximo año conseguir un auspicio para abrir dos sucursales adicionales y tener una nueva bodega de almacenamiento. Indica está información pues espera que el sistema contemple esas necesidades.
+Estructuras:
 
-El producto para su registro debe guarda los siguientes datos básicos:
+Usuario:
+Campos: rol, usuario, clave.
+Producto:
+Campos: nombre, categoria, marca, codigo, precioCompra, bodega.
+Venta:
+Campos: local, vendedor, fecha, precioVenta, cantidad.
+Funciones:
 
-Nombre, categoría, marca, código, precio de compra, bodega
-Al momento de vender se debe poder registrar al menos: Local, vendedor, fecha de venta, precio de venta y reducir la cantidad de producto en bodega.
+crearUsuario: Crea un nuevo usuario y lo agrega al arreglo de usuarios.
+actualizarUsuario: Actualiza la información de un usuario existente en el arreglo.
+crearProducto: Crea un nuevo producto y lo agrega al arreglo de productos.
+actualizarProducto: Actualiza la información de un producto existente en el arreglo.
+venderProducto: Registra una venta, actualizando los productos y agregando la venta al arreglo de ventas.
+guardarDatos: Guarda los datos actuales de usuarios, productos y ventas, posiblemente escribiéndolos en archivos.
+cargarDatosUsuarios: Carga datos de usuarios desde una fuente externa (como un archivo) al arreglo de usuarios.
+cargarDatosProductos: Carga datos de productos desde una fuente externa al arreglo de productos.
+cargarDatosVentas: Carga datos de ventas desde una fuente externa al arreglo de ventas.
+Directivas de Preprocesador:
 
-Debe permitir el registro de usuarios del sistema: Administrador, Bodeguero, Vendedor
+Incluye directivas de preprocesador (#ifndef, #define, #endif) para evitar problemas de inclusión múltiple en el código.
 
-Administrador: Crear y actualizar usuarios
-Bodeguero: Crear y actualizar productos
-Vendedor: Vender producto
-Para guardar la información debe crear estructuras (mínimo: para usuarios, para datos de productos, para registro de ventas)
-La solución debe tener al menos 3 archivos (Los nombres pueden ser cambiados):
-Main.c
-Funciones.h
-Funciones.c
-Producto: máximo 50, Usuario: máximo 10
-Subir los archivos creados en un zip
-Realizar un video explicando lo que hicieron en el taller (Lo realizan después)
-Éxitos en sus actividades!!!
+FUNCIONES.C 
+
+El código proporciona implementaciones para las funciones declaradas en "funciones.h". Aquí hay un resumen de cada función:
+
+crearUsuario
+
+Añade un nuevo usuario al arreglo si hay espacio.
+Solicita al usuario ingresar el rol, nombre de usuario y clave.
+Incrementa el contador de usuarios.
+actualizarUsuario
+
+Busca un usuario por nombre de usuario.
+Si lo encuentra, permite actualizar el rol y la clave.
+Informa si el usuario no se encuentra.
+crearProducto
+
+Añade un nuevo producto al arreglo si hay espacio.
+Solicita al usuario ingresar el nombre, categoría, marca, código, precio de compra y bodega.
+Incrementa el contador de productos.
+actualizarProducto
+
+Busca un producto por código.
+Si lo encuentra, permite actualizar nombre, categoría, marca, precio de compra y bodega.
+Informa si el producto no se encuentra.
+venderProducto
+
+Registra una venta, actualizando la cantidad en bodega del producto.
+Solicita al usuario ingresar el código del producto, local, vendedor, fecha, precio de venta y cantidad.
+Informa si el producto no se encuentra.
+guardarDatos
+
+Guarda los datos de usuarios, productos y ventas en archivos de texto.
+Utiliza tres archivos diferentes (usuarios.txt, productos.txt, ventas.txt).
+cargarDatosUsuarios
+
+Lee datos de usuarios desde un archivo (usuarios.txt) y los carga en el arreglo de usuarios.
+cargarDatosProductos
+
+Lee datos de productos desde un archivo (productos.txt) y los carga en el arreglo de productos.
+cargarDatosVentas
+
+Lee datos de ventas desde un archivo (ventas.txt) y los carga en el arreglo de ventas.
+Además, se utilizan las bibliotecas estándar (stdio.h, stdlib.h, string.h) para manejar entrada/salida, memoria dinámica y manipulación de cadenas. También se utilizan archivos para persistir los datos entre ejecuciones del programa.
