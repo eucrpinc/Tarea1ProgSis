@@ -1,62 +1,38 @@
-#include <stdio.h>
-#include <time.h>
+// funciones.h
+#ifndef FUNCIONES_H
+#define FUNCIONES_H
 
-enum tipo_usuario {
-  ADMINISTRADOR,
-  BODEGUERO,
-  VENDEDOR,
+typedef struct {
+    char rol[20];
+    char usuario[20];
+    char clave[20];
+} Usuario;
 
-};
+typedef struct {
+    char nombre[50];
+    char categoria[20];
+    char marca[20];
+    int codigo;
+    float precioCompra;
+    char bodega[20];
+} Producto;
 
-enum categoria{
-  LAPTOPS,
-  TECLADOS,
-  PROCESADORES,
-  DEFAULT,
+typedef struct {
+    char local[20];
+    char vendedor[20];
+    char fecha[20];
+    float precioVenta;
+    int cantidad;
+} Venta;
 
-};
+void crearUsuario(Usuario usuarios[], int *numUsuarios);
+void actualizarUsuario(Usuario usuarios[], int numUsuarios);
+void crearProducto(Producto productos[], int *numProductos);
+void actualizarProducto(Producto productos[], int numProductos);
+void venderProducto(Producto productos[], int numProductos, Venta ventas[], int *numVentas);
+void guardarDatos(Usuario usuarios[], int numUsuarios, Producto productos[], int numProductos, Venta ventas[], int numVentas);
+void cargarDatosUsuarios(Usuario usuarios[], int *numUsuarios);
+void cargarDatosProductos(Producto productos[], int *numProductos);
+void cargarDatosVentas(Venta ventas[], int *numVentas);
 
-struct Usuario {
-  enum tipo_usuario tipo;
-  char nombre[20];
-  char username[10];
-  char password[10];
-};
-
-struct Bodega {
-  char nombre [20];
-  int id;
-  int inventario;
-};
-
-struct Local {
-  char nombre[20];
-  struct Bodega bodega;
-};
-
-struct Producto {
-  char nombre[20];
-  enum categoria cat;
-  char marca[20];
-  char codigo[10];
-  float precio_compra;
-  struct Bodega bodega;
-};
-
-struct Venta {
-  struct Local local;
-  struct Usuario vendedor;
-  struct tm fecha;
-  struct Producto producto;
-  float precio_venta;
-};
-
-struct Usuario crear_usuario(struct Usuario admin, char nombre[20], char username[20], char password[10]);
-
-struct Usuario actualizar_usuario(struct Usuario admin, struct Usuario usuario);
-
-struct Producto crear_producto(struct Usuario bodeguero, char nombre[20], float precio_compra, char marca [20], char codigo [10]);
-
-struct Producto actualizar_producto(struct Usuario bodeguero, struct Producto producto);
-
-struct Venta vender_producto(struct Usuario vendedor, struct Producto producto, struct Local *sucursal, float precio_venta);
+#endif

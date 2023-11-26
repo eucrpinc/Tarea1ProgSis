@@ -1,305 +1,213 @@
+// funciones.c
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "funciones.h"
 
-struct Usuario crear_usuario(struct Usuario admin, char nombre[20], char username[20], char password[10]){
-  struct Usuario u;
-  int opcion2;
-  
-  if (admin.tipo == ADMINISTRADOR){
-    strncpy(u.nombre, nombre, sizeof(u.nombre)); 
-    strncpy(u.username, username, sizeof(u.username));
-    strncpy(u.password, password, sizeof(u.password));
+void crearUsuario(Usuario usuarios[], int *numUsuarios) {
+    if (*numUsuarios < 10) {
+        printf("\nCreación de nuevo usuario\n");
+        printf("Rol (Administrador/Bodeguero/Vendedor): ");
+        scanf("%s", usuarios[*numUsuarios].rol);
+        printf("Usuario: ");
+        scanf("%s", usuarios[*numUsuarios].usuario);
+        printf("Clave: ");
+        scanf("%s", usuarios[*numUsuarios].clave);
 
-    printf("Tipo de usuario:\n");
-    printf("[1] Administrador\n");
-    printf("[2] Bodeguero\n");
-    printf("[3] Vendedor\n");
-    printf("[4] Default");
-    scanf("%i", &opcion2);
-    switch (opcion2){
-      case 1:
-        u.tipo = ADMINISTRADOR;
-        break;
-
-      case 2:
-        u.tipo = BODEGUERO;
-        break;
-
-      case 3:
-        u.tipo = VENDEDOR;
-        break;
-
-      case 4:
-        printf("Usuario asignado como vendedor\n");
-        printf("Si desea cambiar el tipo de usuario, podrá hacerlo desde el menú\n");
-        u.tipo = VENDEDOR;
-
-        break;
-
-      default:
-        printf("Usuario asignado como vendedor\n");
-        printf("Si desea cambiar el tipo de usuario, podrá hacerlo desde el menú\n");
-        u.tipo = VENDEDOR;
-
-        break;
-    }
-    
-  } else {
-    printf("ERROR. Usted no es administrador.");
-
-  }
-  return u;
-}
-
-struct Usuario actualizar_usuario(struct Usuario admin, struct Usuario usuario) {
-    int opcion;
-    char nombre[20];
-    char user[10];
-    char password[10];
-    int opcion2;
-
-    if (admin.tipo == ADMINISTRADOR) {
-        printf("Seleccione una categoría:\n");
-        printf("[1] Nombre\n");
-        printf("[2] Usuario\n");
-        printf("[3] Contraseña\n");
-        printf("[4] Tipo de usuario\n");
-        printf("[5] Cancelar\n");
-
-        scanf("%i", &opcion);
-
-        switch (opcion) {
-            case 1:
-                printf("Nombre: ");
-                scanf("%s", nombre);
-                // Evita desbordamiento del buffer
-                strncpy(usuario.nombre, nombre, sizeof(usuario.nombre));
-                break;
-
-            case 2:
-                printf("Usuario: ");
-                scanf("%s", user);
-                strncpy(usuario.username, user, sizeof(usuario.username));
-                break;
-
-            case 3:
-                printf("Contraseña: ");
-                scanf("%s", password);
-                strncpy(usuario.password, password, sizeof(usuario.password));
-                break;
-
-            case 4:
-                printf("Tipo de usuario:\n");
-                printf("[1] Administrador\n");
-                printf("[2] Bodeguero\n");
-                printf("[3] Vendedor\n");
-                printf("[4] Cancelar");
-                scanf("%i", &opcion2);
-                switch (opcion2) {
-                    case 1:
-                        usuario.tipo = ADMINISTRADOR;
-                        break;
-
-                    case 2:
-                        usuario.tipo = BODEGUERO;
-                        break;
-
-                    case 3:
-                        usuario.tipo = VENDEDOR;
-                        break;
-
-                    case 4:
-                        printf("Saliendo...\n");
-                        printf("Saliste exitosamente\n");
-                        break;
-
-                    default:
-                        printf("Saliendo...\n");
-                        printf("Saliste exitosamente\n");
-                        break;
-                }
-                break;
-
-            case 5:
-                printf("Saliendo...\n");
-                printf("Saliste exitosamente\n");
-                break;
-
-            default:
-                printf("Opción incorrecta.\n");
-                printf("Saliendo...\n");
-                printf("Saliste exitosamente\n");
-                break;
-        }
-
+        (*numUsuarios)++;
+        printf("Usuario creado con éxito.\n");
     } else {
-        printf("ERROR. Usted no es administrador.\n");
+        printf("Error: No se pueden agregar más usuarios.\n");
     }
-    return usuario;
 }
 
-struct Producto crear_producto(struct Usuario bodeguero, char nombre[20], float precio_compra, char marca [20], char codigo [10]){
-  struct Producto p;
-  int opcion2;
+void actualizarUsuario(Usuario usuarios[], int numUsuarios) {
+    printf("\nActualización de usuario\n");
+    char usuarioBuscado[20];
+    printf("Ingrese el nombre de usuario a actualizar: ");
+    scanf("%s", usuarioBuscado);
 
-  if (bodeguero.tipo == BODEGUERO){
-    strncpy(p.nombre, nombre, sizeof(p.nombre)); 
-    strncpy(p.marca, marca, sizeof(p.marca)); 
-    strncpy(p.codigo, codigo, sizeof(p.codigo)); 
-    p.precio_compra = precio_compra;
+    int encontrado = 0;
+    for (int i = 0; i < numUsuarios; i++) {
+        if (strcmp(usuarios[i].usuario, usuarioBuscado) == 0) {
+            printf("Nuevo rol (Administrador/Bodeguero/Vendedor): ");
+            scanf("%s", usuarios[i].rol);
+            printf("Nueva clave: ");
+            scanf("%s", usuarios[i].clave);
 
-    printf("Tipo de usuario:\n");
-    printf("[1] Laptops\n");
-    printf("[2] Teclados\n");
-    printf("[3] Procesadores\n");
-    printf("[4] Default\n");
-    scanf("%i", &opcion2);
-    switch (opcion2){
-      case 1:
-        p.cat = LAPTOPS;
-        break;
-
-      case 2:
-        p.cat = TECLADOS;
-        break;
-
-      case 3:
-        p.cat = PROCESADORES;
-        break;
-
-      case 4:
-        printf("Producto asignado como default\n");
-        printf("Si desea cambiar la cat del producto, podrá hacerlo desde el menú\n");
-        p.cat = DEFAULT;
-
-        break;
-
-      default:
-        printf("Producto asignado como default\n");
-        printf("Si desea cambiar la cat del producto, podrá hacerlo desde el menú\n");
-        p.cat = DEFAULT;
-
-        break;
+            encontrado = 1;
+            printf("Usuario actualizado con éxito.\n");
+            break;
+        }
     }
-    
 
-  } else {
-    printf("ERROR. Usted no es bodeguero.");
-
-  }
-  return p;
+    if (!encontrado) {
+        printf("Error: Usuario no encontrado.\n");
+    }
 }
 
-struct Producto actualizar_producto(struct Usuario bodeguero, struct Producto producto) {
-      int opcion;
-      int opcion2;
-      char nombre[20];
-      float precio;
-      char marca[20];
+void crearProducto(Producto productos[], int *numProductos) {
+    if (*numProductos < 50) {
+        printf("\nCreación de nuevo producto\n");
+        printf("Nombre: ");
+        scanf("%s", productos[*numProductos].nombre);
+        printf("Categoría: ");
+        scanf("%s", productos[*numProductos].categoria);
+        printf("Marca: ");
+        scanf("%s", productos[*numProductos].marca);
+        printf("Código: ");
+        scanf("%d", &productos[*numProductos].codigo);
+        printf("Precio de compra: ");
+        scanf("%f", &productos[*numProductos].precioCompra);
+        printf("Bodega: ");
+        scanf("%s", productos[*numProductos].bodega);
 
-      if (bodeguero.tipo == BODEGUERO) {
-          printf("Seleccione una categoría:\n");
-          printf("[1] Nombre\n");
-          printf("[2] Precio\n");
-          printf("[3] Marca\n");
-          printf("[4] Categoría\n");
-          printf("[5] Cancelar\n");
+        (*numProductos)++;
+        printf("Producto creado con éxito.\n");
+    } else {
+        printf("Error: No se pueden agregar más productos.\n");
+    }
+}
 
-          scanf("%i", &opcion);
+void actualizarProducto(Producto productos[], int numProductos) {
+    printf("\nActualización de producto\n");
+    int codigoBuscado;
+    printf("Ingrese el código del producto a actualizar: ");
+    scanf("%d", &codigoBuscado);
 
-          switch (opcion) {
-              case 1:
-                  printf("Nombre: ");
-                  scanf("%s", nombre);
-                  // Evita desbordamiento del buffer
-                  strncpy(producto.nombre, nombre, sizeof(producto.nombre));
-                  break;
+    int encontrado = 0;
+    for (int i = 0; i < numProductos; i++) {
+        if (productos[i].codigo == codigoBuscado) {
+            printf("Nuevo nombre: ");
+            scanf("%s", productos[i].nombre);
+            printf("Nueva categoría: ");
+            scanf("%s", productos[i].categoria);
+            printf("Nueva marca: ");
+            scanf("%s", productos[i].marca);
+            printf("Nuevo precio de compra: ");
+            scanf("%f", &productos[i].precioCompra);
+            printf("Nueva bodega: ");
+            scanf("%s", productos[i].bodega);
 
-              case 2:
-                  printf("Nuevo Precio: ");
-                  scanf("%f", &precio);
-                  producto.precio_compra = precio;
-                  break;
+            encontrado = 1;
+            printf("Producto actualizado con éxito.\n");
+            break;
+        }
+    }
 
-              case 3:
-                  printf("Nueva Marca: ");
-                  scanf("%s", marca);
-                  strncpy(producto.marca, marca, sizeof(producto.marca));
-                  break;
+    if (!encontrado) {
+        printf("Error: Producto no encontrado.\n");
+    }
+}
 
-              case 4:
-                  printf("Categorías disponibles:\n");
-                  printf("[1] Laptops\n");
-                  printf("[2] Teclados\n");
-                  printf("[3] Procesadores\n");
-                  printf("[4] Default\n");
-                  printf("[5] Cancelar\n");
-                  scanf("%i", &opcion2);
-                  switch (opcion2) {
-                      case 1:
-                          producto.cat = LAPTOPS;
-                          break;
+void venderProducto(Producto productos[], int numProductos, Venta ventas[], int *numVentas) {
+    printf("\nRegistro de venta\n");
+    int codigoBuscado;
+    printf("Ingrese el código del producto a vender: ");
+    scanf("%d", &codigoBuscado);
 
-                      case 2:
-                          producto.cat = TECLADOS;
-                          break;
+    int encontrado = 0;
+    for (int i = 0; i < numProductos; i++) {
+        if (productos[i].codigo == codigoBuscado) {
+            printf("Local: ");
+            scanf("%s", ventas[*numVentas].local);
+            printf("Vendedor: ");
+            scanf("%s", ventas[*numVentas].vendedor);
+            printf("Fecha: ");
+            scanf("%s", ventas[*numVentas].fecha);
+            printf("Precio de venta: ");
+            scanf("%f", &ventas[*numVentas].precioVenta);
+            printf("Cantidad: ");
+            scanf("%d", &ventas[*numVentas].cantidad);
 
-                      case 3:
-                          producto.cat = PROCESADORES;
-                          break;
+            // Actualizar la cantidad de producto en bodega
+            // (Asumiendo que hay un campo 'cantidad' en la estructura Producto)
+            productos[i].cantidad -= ventas[*numVentas].cantidad;
 
-                      case 4:
-                          producto.cat = DEFAULT;
-                          break;
+            (*numVentas)++;
+            encontrado = 1;
+            printf("Venta registrada con éxito.\n");
+            break;
+        }
+    }
 
-                      case 5:
-                          printf("Saliendo...\n");
-                          printf("Saliste exitosamente\n");
-                          break;
+    if (!encontrado) {
+        printf("Error: Producto no encontrado.\n");
+    }
+}
 
-                      default:
-                          printf("Saliendo...\n");
-                          printf("Saliste exitosamente\n");
-                          break;
-                  }
-                  break;
+void guardarDatos(Usuario usuarios[], int numUsuarios, Producto productos[], int numProductos, Venta ventas[], int numVentas) {
+    FILE *usuariosFile = fopen("usuarios.txt", "w");
+    FILE *productosFile = fopen("productos.txt", "w");
+    FILE *ventasFile = fopen("ventas.txt", "w");
 
-              case 5:
-                  printf("Saliendo...\n");
-                  printf("Saliste exitosamente\n");
-                  break;
+    if (usuariosFile == NULL || productosFile == NULL || ventasFile == NULL) {
+        printf("Error al abrir archivos para escritura.\n");
+        exit(1);
+    }
 
-              default:
-                  printf("Opción incorrecta.\n");
-                  printf("Saliendo...\n");
-                  printf("Saliste exitosamente\n");
-                  break;
-          }
-      } else {
-          printf("ERROR. Usted no es bodeguero.\n");
-      }
-      return producto;
-  }
+    // Guardar usuarios en el archivo
+    for (int i = 0; i < numUsuarios; i++) {
+        fprintf(usuariosFile, "%s %s %s\n", usuarios[i].rol, usuarios[i].usuario, usuarios[i].clave);
+    }
+    fclose(usuariosFile);
 
-struct Venta vender_producto(struct Usuario vendedor, struct Producto producto, struct Local *sucursal, float precio_venta){
-  struct Venta nuevaventa;
-  time_t tiempo;
+    // Guardar productos en el archivo
+    for (int i = 0; i < numProductos; i++) {
+        fprintf(productosFile, "%s %s %s %d %.2f %s\n", productos[i].nombre, productos[i].categoria,
+                productos[i].marca, productos[i].codigo, productos[i].precioCompra, productos[i].bodega);
+    }
+    fclose(productosFile);
 
-  nuevaventa.local = *sucursal;
-  nuevaventa.vendedor = vendedor;
-  nuevaventa.producto = producto;
+    // Guardar ventas en el archivo
+    for (int i = 0; i < numVentas; i++) {
+        fprintf(ventasFile, "%s %s %s %.2f %d\n", ventas[i].local, ventas[i].vendedor, ventas[i].fecha,
+                ventas[i].precioVenta, ventas[i].cantidad);
+    }
+    fclose(ventasFile);
+}
 
-  // Obtener la fecha y hora actual
-  time(&tiempo);
-  nuevaventa.fecha = *localtime(&tiempo);
+void cargarDatosUsuarios(Usuario usuarios[], int *numUsuarios) {
+    FILE *archivoUsuarios = fopen("usuarios.txt", "r");
+    if (archivoUsuarios == NULL) {
+        printf("Error al abrir el archivo de usuarios.\n");
+        exit(1);
+    }
 
-  // Establecer el precio de venta
-  nuevaventa.precio_venta = precio_venta; // Aquí debes establecer el precio de venta adecuado
+    while (fscanf(archivoUsuarios, "%s %s %s", usuarios[*numUsuarios].rol, usuarios[*numUsuarios].usuario, usuarios[*numUsuarios].clave) == 3) {
+        (*numUsuarios)++;
+    }
 
-  struct Bodega bodega = sucursal->bodega;
-  bodega.inventario -= 1;
+    fclose(archivoUsuarios);
+}
 
-  return nuevaventa;
-  
+void cargarDatosProductos(Producto productos[], int *numProductos) {
+    FILE *archivoProductos = fopen("productos.txt", "r");
+    if (archivoProductos == NULL) {
+        printf("Error al abrir el archivo de productos.\n");
+        exit(1);
+    }
+
+    while (fscanf(archivoProductos, "%s %s %s %d %f %s", productos[*numProductos].nombre, productos[*numProductos].categoria,
+           productos[*numProductos].marca, &productos[*numProductos].codigo, &productos[*numProductos].precioCompra,
+           productos[*numProductos].bodega) == 6) {
+        (*numProductos)++;
+    }
+
+    fclose(archivoProductos);
+}
+
+void cargarDatosVentas(Venta ventas[], int *numVentas) {
+    FILE *archivoVentas = fopen("ventas.txt", "r");
+    if (archivoVentas == NULL) {
+        printf("Error al abrir el archivo de ventas.\n");
+        exit(1);
+    }
+
+    while (fscanf(archivoVentas, "%s %s %s %f %d", ventas[*numVentas].local, ventas[*numVentas].vendedor,
+           ventas[*numVentas].fecha, &ventas[*numVentas].precioVenta, &ventas[*numVentas].cantidad) == 5) {
+        (*numVentas)++;
+    }
+
+    fclose(archivoVentas);
 }
