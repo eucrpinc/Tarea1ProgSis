@@ -1,0 +1,55 @@
+************************* I N F O *************************
+ G R U P O # 6
+ LIDER: 
+  APELLIDOS Y NOMBRE: CRIOLLO PINCAY EURO  
+  CARRERA: ING.COMPUTACIÓN
+  POR QUÉ LIDER: SE ENCUENTRA EN EL CENTRO DE DEL GRUPO
+  Y PUEDE MEJOR LA COMUNICACIÓN DEL EQUIPO 
+INTEGRANTES: 
+  APELLIDOS Y NOMBRE: GUAMANÍ HERRERA JOEL 
+  CARRERA: ING. COMPUTACIÓN
+  APELLIDOS Y NOMBRE:MAGALLES AREVALO KEVIN
+  CARRERA: ING. COMPUTACIÓN
+******* D I V I S I O N    D E L    T A L L E R ******* 
+AL PRINCIPIO NO DIVIDIMOS EL TRABAJOS 
+-EN EL CUAL UNO SE ENCARGABA DE LAS TODAS LA FUNCIONES DEL
+PRGRAMA ES DECIR LA FUNCIONES DE "AGREGAR PRODUCTOS, ACTUALIZAR
+PRODUCTOS Y VENDER PRODUCTOS"
+-AL MISMO TIEMPO SE TRABAJO EN LA PRESENTACION DEL PROGRAMA ES
+DECIR LA CREACION DE LOS DOS MENU TANDO EN DE CREAR E INGRESO 
+DE DE USUARIO COMO EL 2 MENU EL OTRO MENU DE Y LLAMADA DE LAS 
+DIFERENTES FUNCIONES
+-Y POR ULTIMO SE ECARGO LA CREACION Y VALIDACION DE LOS USUARIOS
+HACIENDO REFERENCIA AL USUARIO DE BODEGUERO Y VENDEDOR
+
+************  L I N K   D E L   V I D E O ************
+            https://youtu.be/H0-O8_eXEOA
+            
+****************** T A L L E R # 1  ******************
+
+
+TALLER #1
+
+Una tienda de productos electrónicos desea tener un sistema para el registro de los productos que compra y vende para poder en un futuro analizar la rentabilidad de cada producto, categorías y marcas.
+
+El cliente espera el próximo año conseguir un auspicio para abrir dos sucursales adicionales y tener una nueva bodega de almacenamiento. Indica está información pues espera que el sistema contemple esas necesidades.
+
+El producto para su registro debe guarda los siguientes datos básicos:
+
+Nombre, categoría, marca, código, precio de compra, bodega
+Al momento de vender se debe poder registrar al menos: Local, vendedor, fecha de venta, precio de venta y reducir la cantidad de producto en bodega.
+
+Debe permitir el registro de usuarios del sistema: Administrador, Bodeguero, Vendedor
+
+Administrador: Crear y actualizar usuarios
+Bodeguero: Crear y actualizar productos
+Vendedor: Vender producto
+Para guardar la información debe crear estructuras (mínimo: para usuarios, para datos de productos, para registro de ventas)
+La solución debe tener al menos 3 archivos (Los nombres pueden ser cambiados):
+Main.c
+Funciones.h
+Funciones.c
+Producto: máximo 50, Usuario: máximo 10
+Subir los archivos creados en un zip
+Realizar un video explicando lo que hicieron en el taller (Lo realizan después)
+Éxitos en sus actividades!!!
